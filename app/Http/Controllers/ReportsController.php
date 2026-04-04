@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Transaction;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Services\ReportService;
 
@@ -63,7 +64,7 @@ class ReportsController extends Controller
             if ($view === 'transactions') {
                 return response()->json([
                     'main' => view('partials.transactions', compact('transactions', 'currentReport'))->render(),
-                    'side' => view('partials.filters', compact('categories'))->render(),
+                    'side' => view('partials.filters', compact('categories', 'currentReport'))->render(),
                 ]);
             } else {
                 return response()->json([
@@ -100,6 +101,26 @@ class ReportsController extends Controller
         $summary = $service->getSummaryForReport($user_id, $request->report);
 
         return view('partials.report-summary', compact('summary'));
+    }
+
+    public function downloadPdf(Request $request, ReportService $reportService)
+    {
+        $userId = auth()->id();
+
+        $start = $request->start;
+        $end = $request->end;
+
+        $transactions = $reportService->getTransactionsForReport($userId, $start, $end)->get();
+        $summary = $reportService->getSummaryForReport($userId, $start);
+
+        $pdf = Pdf::loadView('partials.pdf.report', [
+            'transactions' => $transactions,
+            'summary' => $summary,
+            'start' => $start,
+            'end' => $end
+        ]);
+
+        return $pdf->download('report.pdf');
     }
 
 }

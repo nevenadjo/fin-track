@@ -19,6 +19,9 @@
             <p class="bold primary-text-color-light">Studijski program:</p>
             <p>Internet tehnologije</p>
 
+            <p class="bold primary-text-color-light">Dokumentacija:</p>
+            <a href="{{asset('dokumentacija.pdf')}}" target="_blank">dokumentacija.pdf</a>
+
         </div>
     </div>
 </div>

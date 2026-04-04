@@ -18,20 +18,41 @@ class AdminController extends Controller
 
         $last7Days = now()->subDays(6)->startOfDay();
 
-        $usersChart = User::where('created_at', '>=', $last7Days)
+        $usersData = User::where('created_at', '>=', $last7Days)
             ->get()
             ->groupBy(fn($u) => $u->created_at->format('Y-m-d'))
             ->map->count();
 
-        $logsChart = Log::where('created_at', '>=', $last7Days)
+        $usersChart = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $date = now()->subDays($i)->format('Y-m-d');
+
+            $usersChart->put($date, $usersData->get($date, 0));
+        }
+
+        $logsData = Log::where('created_at', '>=', $last7Days)
             ->get()
             ->groupBy(fn($l) => $l->created_at->format('Y-m-d'))
             ->map->count();
 
-        $transactionsChart = Transaction::where('created_at', '>=', $last7Days)
+        $logsChart = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $date = now()->subDays($i)->format('Y-m-d');
+
+            $logsChart->put($date, $logsData->get($date, 0));
+        }
+
+        $transactionsData = Transaction::where('created_at', '>=', $last7Days)
             ->get()
             ->groupBy(fn($t) => $t->created_at->format('Y-m-d'))
             ->map->count();
+
+        $transactionsChart = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $date = now()->subDays($i)->format('Y-m-d');
+
+            $transactionsChart->put($date, $transactionsData->get($date, 0));
+        }
 
         return view('pages.admin.dashboard', compact(
             'usersCount',

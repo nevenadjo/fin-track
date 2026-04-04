@@ -17,15 +17,14 @@ class ContactController extends Controller
     public function send(Request $request)
     {
         $validated = $request->validate([
-            'name'    => 'required|string|max:255',
+            'firstName'    => 'required|string|max:255',
             'email'   => 'required|email',
-            'message' => 'required|min:10',
+            'message' => 'required|string|min:10',
         ]);
 
-        Mail::to('nevenadjosan00@gmail.com')
+        Mail::to('admin@fintrack.com')
             ->send(new ContactMessage($validated));
 
-        return redirect()->route('contact')
-            ->with('success', 'Your message has been sent successfully.');
+        return back()->with('success', 'Your message has been sent successfully.');
     }
 }

@@ -12,7 +12,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\WelcomePageController;
 
 Route::get('/', function () {
     if(Auth::check() && auth()->user()->isAdmin()) {
@@ -88,6 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/transactions', [TransactionController::class, 'index']);
     Route::get('/reports/list', [ReportsController::class, 'list']);
     Route::get('/reports/summary', [ReportsController::class, 'summary']);
+    Route::get('/reports/download', [ReportsController::class, 'downloadPdf'])->name('reports.download');
 
     //dashboard chart data
     Route::get('/dashboard/balance-chart', [DashboardController::class, 'balanceChart']);
