@@ -4,13 +4,11 @@ Web aplikacija za praćenje ličnih finansija sa podrškom za transakcije, izvje
 
 **Dokumentacija** se nalazi na About Us strani.
 
----
 
 ##  Pokretanje projekta i kredencijali
 
 Slijedite korake ispod kako biste pokrenuli aplikaciju lokalno:
 
----
 
 ## 1. Kloniranje repozitorijuma
 
@@ -19,7 +17,6 @@ git clone https://github.com/nevenadjo/fin-track.git
 cd fin-track
 ```
 
----
 
 ## 2. Instalacija dependencija
 
@@ -27,7 +24,6 @@ cd fin-track
 composer install
 ```
 
----
 
 ## 3. Kreiranje .env fajla
 
@@ -35,7 +31,6 @@ composer install
 cp .env.example .env
 ```
 
----
 
 ## 4. Generisanje aplikacionog ključa
 
@@ -43,7 +38,6 @@ cp .env.example .env
 php artisan key:generate
 ```
 
----
 
 ## 5. Podešavanje baze (SQLite)
 
@@ -60,7 +54,6 @@ Zatim kreirati fajl baze:
 touch database/database.sqlite
 ```
 
----
 
 ## 6. Migracije i seederi
 
@@ -68,7 +61,6 @@ touch database/database.sqlite
 php artisan migrate --seed
 ```
 
----
 
 ## 7. Mail konfiguracija
 
@@ -91,7 +83,6 @@ Alternativa (bez slanja mailova):
 MAIL_MAILER=log
 ```
 
----
 
 ## 8. Pokretanje aplikacije
 
@@ -102,7 +93,6 @@ php artisan serve
 Aplikacija će biti dostupna na:
 http://127.0.0.1:8000
 
----
 
 ##  Test nalozi
 
@@ -116,7 +106,6 @@ email: user1@fintrack.com
 
 password: password
 
----
 
 ##  Napomene
 Aplikacija koristi SQLite bazu (nije potreban dodatni DB server)
