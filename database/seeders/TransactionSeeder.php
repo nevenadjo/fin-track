@@ -18,7 +18,7 @@ class TransactionSeeder extends Seeder
     {
         $users = User::whereHas('role', fn($q)=>$q->where('name','user'))->get();
         $categories = Category::all();
-        $incomeCategories = Category::where('type', 'income');
+        $incomeCategories = Category::where('type', 'income')->get();
 
         foreach ($users as $user) {
             if ($user->email == 'user1@fintrack.com') {

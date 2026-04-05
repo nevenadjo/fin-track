@@ -26,7 +26,6 @@ class UserSeeder extends Seeder
                 'name' => "User {$i}",
                 'password' => Hash::make('password'),
                 'role_id' => $userRole->id,
-                'month_start' => rand(1,28),
                 'currency_id' => rand(1,5),
                 'created_at' => $date,
                 'updated_at' => $date

@@ -41,7 +41,7 @@ class LogSeeder extends Seeder
                 Log::create([
                     'user_id'    => $user->id,
                     'action'     => $action,
-                    'message'    => $logs[$action] . ' ' . $date->format('Y-m-d H:i:s'),
+                    'message'    => $logs[$action],
                     'created_at' => $date,
                     'updated_at' => $date,
                 ]);
