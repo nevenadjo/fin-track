@@ -1,6 +1,6 @@
 #  FinTrack aplikacija
 
-Web aplikacija za praćenje ličnih finansija sa podrškom za transakcije, izvještaje, analitiku i admin panel.
+Web aplikacija urađena u Laravelu za praćenje ličnih finansija sa podrškom za transakcije, izvještaje, analitiku i admin panel.
 
 **Dokumentacija** se nalazi na About Us strani.
 
